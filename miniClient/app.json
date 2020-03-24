@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/components/index/index",
+    "pages/components/logs/logs"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "充电桩",
+    "navigationBarTextStyle": "black"
+  },
+
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
