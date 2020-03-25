@@ -2,6 +2,7 @@ package cn.com.servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,23 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.IOUtils;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.mchange.v2.c3p0.impl.NewPooledConnection;
 
+import cn.com.bean.Message;
 import cn.com.bean.User;
 import cn.com.service.UserService;
 import cn.com.utils.BaseServlet;
 import cn.com.utils.CommonUtils;
 import cn.com.utils.MultiplexUtils;
 
-
-
 @WebServlet("/user")
 public class UserServlet extends BaseServlet {
 	private UserService userService = new UserService();
-
+	
+	private final String SUCCESS = "1";		//操作成功确认号（返回给客户端）
 	/**
 	 * 场景：上传图片到服务器
 	 * 输入：图片，可能还有其他数据
@@ -96,10 +95,17 @@ public class UserServlet extends BaseServlet {
 	 * @param response
 	 * @throws IOException
 	 */
-	public void insertuser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		//获取数据对象user
-		User user = MultiplexUtils.getparams(request, response, User.class);
-		//将user插入数据库
-		userService.add(user);
+	public void insertuser(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		try {
+			//获取数据对象user
+			User user = MultiplexUtils.getparams(request, response, User.class);
+			//将user插入数据库
+			userService.add(user);
+			//操作成功，返回 {"result":"1"}
+			response.getWriter().print(new Message(SUCCESS).getJsonMessage());
+		} catch (Message e) {
+			// 异常打印信息 {"result":"xxx"}
+			response.getWriter().print(e.getJsonMessage());
+		}
 	}
 }
