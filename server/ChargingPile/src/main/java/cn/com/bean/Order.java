@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Order {
-	private int oid;
+	private Integer oid;
 	private String order_code;
 	private Date start_time;
 	private Date end_time;
 	private BigDecimal cost;
 	private BigDecimal capacity;
-	private int status;
+	private Integer status;
 	private User user;
 	private Chargingpile chargingpile;
 	private Date create_time;
@@ -18,8 +18,8 @@ public class Order {
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
-	public Order(int oid, String order_code, Date start_time, Date end_time, BigDecimal cost, BigDecimal capacity,
-			int status, User user, Chargingpile chargingpile, Date create_time) {
+	public Order(Integer oid, String order_code, Date start_time, Date end_time, BigDecimal cost, BigDecimal capacity,
+			Integer status, User user, Chargingpile chargingpile, Date create_time) {
 		super();
 		this.oid = oid;
 		this.order_code = order_code;
@@ -32,10 +32,10 @@ public class Order {
 		this.chargingpile = chargingpile;
 		this.create_time = create_time;
 	}
-	public int getOid() {
+	public Integer getOid() {
 		return oid;
 	}
-	public void setOid(int oid) {
+	public void setOid(Integer oid) {
 		this.oid = oid;
 	}
 	public String getOrder_code() {
@@ -68,10 +68,10 @@ public class Order {
 	public void setCapacity(BigDecimal capacity) {
 		this.capacity = capacity;
 	}
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	public User getUser() {

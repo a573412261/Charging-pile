@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Comment {
-	private int comid;
+	private Integer comid;
 	private Date time;
-	private int rank;
+	private Integer rank;
 	private String text;
-	private int like;
-	private int hate;
+	private Integer like;
+	private Integer hate;
 	private User user;
 	private Chargingpile chargingpile;
 	private Date create_time;
@@ -18,7 +18,7 @@ public class Comment {
 	public Comment() {
 		// TODO Auto-generated constructor stub
 	}
-	public Comment(int comid, Date time, int rank, String text, int like, int hate, User user,
+	public Comment(Integer comid, Date time, Integer rank, String text, Integer like, Integer hate, User user,
 			Chargingpile chargingpile, Date create_time, Reply[] reply) {
 		super();
 		this.comid = comid;
@@ -32,10 +32,10 @@ public class Comment {
 		this.create_time = create_time;
 		this.reply = reply;
 	}
-	public int getComid() {
+	public Integer getComid() {
 		return comid;
 	}
-	public void setComid(int comid) {
+	public void setComid(Integer comid) {
 		this.comid = comid;
 	}
 	public Date getTime() {
@@ -44,10 +44,10 @@ public class Comment {
 	public void setTime(Date time) {
 		this.time = time;
 	}
-	public int getRank() {
+	public Integer getRank() {
 		return rank;
 	}
-	public void setRank(int rank) {
+	public void setRank(Integer rank) {
 		this.rank = rank;
 	}
 	public String getText() {
@@ -56,16 +56,16 @@ public class Comment {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public int getLike() {
+	public Integer getLike() {
 		return like;
 	}
-	public void setLike(int like) {
+	public void setLike(Integer like) {
 		this.like = like;
 	}
-	public int getHate() {
+	public Integer getHate() {
 		return hate;
 	}
-	public void setHate(int hate) {
+	public void setHate(Integer hate) {
 		this.hate = hate;
 	}
 	public User getUser() {

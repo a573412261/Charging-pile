@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Chargingpile {
-	private int cid;
+	private Integer cid;
 	private String code;
 	private String name;
 	private String address;
 	private BigDecimal longitude;
 	private BigDecimal latitude;
 	private BigDecimal power;
-	private int status;
+	private Integer status;
 	private BigDecimal rank;
 	private BigDecimal charge;
 	private String interfacetype;
@@ -23,8 +23,8 @@ public class Chargingpile {
 	public Chargingpile() {
 		// TODO Auto-generated constructor stub
 	}
-	public Chargingpile(int cid, String code, String name, String address, BigDecimal longitude, BigDecimal latitude,
-			BigDecimal power, int status, BigDecimal rank, BigDecimal charge, String interfacetype, Date create_time,
+	public Chargingpile(Integer cid, String code, String name, String address, BigDecimal longitude, BigDecimal latitude,
+			BigDecimal power, Integer status, BigDecimal rank, BigDecimal charge, String interfacetype, Date create_time,
 			Order[] order, Comment[] comment) {
 		super();
 		this.cid = cid;
@@ -59,10 +59,10 @@ public class Chargingpile {
 		this.comment = comment;
 	}
 
-	public int getCid() {
+	public Integer getCid() {
 		return cid;
 	}
-	public void setCid(int cid) {
+	public void setCid(Integer cid) {
 		this.cid = cid;
 	}
 	public String getCode() {
@@ -101,10 +101,10 @@ public class Chargingpile {
 	public void setPower(BigDecimal power) {
 		this.power = power;
 	}
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	public BigDecimal getRank() {

@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class User {
-	private int uid;
+	private Integer uid;
 	private String username;
 	private String imageaddress;
 	private String cartype;
 	private String carnumber;
-	private int integral;
+	private Integer integral;
 	private BigDecimal balance;
 	private String password;
 	private String address;
@@ -24,7 +24,7 @@ public class User {
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-	public User(int uid, String username, String imageaddress, String cartype, String carnumber, int integral,
+	public User(Integer uid, String username, String imageaddress, String cartype, String carnumber, Integer integral,
 			BigDecimal balance, String password, String address, Chargingpile chargingpile, Schedule schedule,
 			Date create_time, Order[] order, Comment[] comment, Reply[] reply) {
 		super();
@@ -69,10 +69,10 @@ public class User {
 		this.reply = reply;
 	}
 
-	public int getUid() {
+	public Integer getUid() {
 		return uid;
 	}
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 	public String getUsername() {
@@ -99,10 +99,10 @@ public class User {
 	public void setCarnumber(String carnumber) {
 		this.carnumber = carnumber;
 	}
-	public int getIntegral() {
+	public Integer getIntegral() {
 		return integral;
 	}
-	public void setIntegral(int integral) {
+	public void setIntegral(Integer integral) {
 		this.integral = integral;
 	}
 	public BigDecimal getBalance() {

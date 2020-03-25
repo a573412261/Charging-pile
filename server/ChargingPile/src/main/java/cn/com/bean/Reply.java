@@ -3,11 +3,11 @@ package cn.com.bean;
 import java.util.Date;
 
 public class Reply {
-	private int rid;
+	private Integer rid;
 	private Date time;
 	private String text;
-	private int like;
-	private int hate;
+	private Integer like;
+	private Integer hate;
 	private User user;
 	private Comment comment;
 	private Date create_time;
@@ -15,7 +15,7 @@ public class Reply {
 	public Reply() {
 		// TODO Auto-generated constructor stub
 	}
-	public Reply(int rid, Date time, String text, int like, int hate, User user, Comment comment, Date create_time) {
+	public Reply(Integer rid, Date time, String text, Integer like, Integer hate, User user, Comment comment, Date create_time) {
 		super();
 		this.rid = rid;
 		this.time = time;
@@ -26,10 +26,10 @@ public class Reply {
 		this.comment = comment;
 		this.create_time = create_time;
 	}
-	public int getRid() {
+	public Integer getRid() {
 		return rid;
 	}
-	public void setRid(int rid) {
+	public void setRid(Integer rid) {
 		this.rid = rid;
 	}
 	public Date getTime() {
@@ -44,16 +44,16 @@ public class Reply {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public int getLike() {
+	public Integer getLike() {
 		return like;
 	}
-	public void setLike(int like) {
+	public void setLike(Integer like) {
 		this.like = like;
 	}
-	public int getHate() {
+	public Integer getHate() {
 		return hate;
 	}
-	public void setHate(int hate) {
+	public void setHate(Integer hate) {
 		this.hate = hate;
 	}
 	public User getUser() {

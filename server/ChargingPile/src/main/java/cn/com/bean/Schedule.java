@@ -3,23 +3,23 @@ package cn.com.bean;
 import java.util.Date;
 
 public class Schedule {
-	private int sid;
+	private Integer sid;
 	private String time;
 	private Date create_time;
 	
 	public Schedule() {
 		// TODO Auto-generated constructor stub
 	}
-	public Schedule(int sid, String time, Date create_time) {
+	public Schedule(Integer sid, String time, Date create_time) {
 		super();
 		this.sid = sid;
 		this.time = time;
 		this.create_time = create_time;
 	}
-	public int getSid() {
+	public Integer getSid() {
 		return sid;
 	}
-	public void setSid(int sid) {
+	public void setSid(Integer sid) {
 		this.sid = sid;
 	}
 	public String getTime() {
