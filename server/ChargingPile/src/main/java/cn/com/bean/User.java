@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class User {
 	private Integer uid;
+	private String uuid;
 	private String username;
 	private String imageaddress;
 	private String cartype;
@@ -24,11 +25,13 @@ public class User {
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-	public User(Integer uid, String username, String imageaddress, String cartype, String carnumber, Integer integral,
-			BigDecimal balance, String password, String address, Chargingpile chargingpile, Schedule schedule,
-			Date create_time, Order[] order, Comment[] comment, Reply[] reply) {
+
+	public User(Integer uid, String uuid, String username, String imageaddress, String cartype, String carnumber,
+			Integer integral, BigDecimal balance, String password, String address, Chargingpile chargingpile,
+			Schedule schedule, Date create_time, Order[] order, Comment[] comment, Reply[] reply) {
 		super();
 		this.uid = uid;
+		this.uuid = uuid;
 		this.username = username;
 		this.imageaddress = imageaddress;
 		this.cartype = cartype;
@@ -43,6 +46,111 @@ public class User {
 		this.order = order;
 		this.comment = comment;
 		this.reply = reply;
+	}
+
+
+	public Integer getUid() {
+		return uid;
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getImageaddress() {
+		return imageaddress;
+	}
+
+	public void setImageaddress(String imageaddress) {
+		this.imageaddress = imageaddress;
+	}
+
+	public String getCartype() {
+		return cartype;
+	}
+
+	public void setCartype(String cartype) {
+		this.cartype = cartype;
+	}
+
+	public String getCarnumber() {
+		return carnumber;
+	}
+
+	public void setCarnumber(String carnumber) {
+		this.carnumber = carnumber;
+	}
+
+	public Integer getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Integer integral) {
+		this.integral = integral;
+	}
+
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Chargingpile getChargingpile() {
+		return chargingpile;
+	}
+
+	public void setChargingpile(Chargingpile chargingpile) {
+		this.chargingpile = chargingpile;
+	}
+
+	public Schedule getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+	}
+
+	public Date getCreate_time() {
+		return create_time;
+	}
+
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
 	}
 
 	public Order[] getOrder() {
@@ -69,86 +177,13 @@ public class User {
 		this.reply = reply;
 	}
 
-	public Integer getUid() {
-		return uid;
-	}
-	public void setUid(Integer uid) {
-		this.uid = uid;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getImageaddress() {
-		return imageaddress;
-	}
-	public void setImageaddress(String imageaddress) {
-		this.imageaddress = imageaddress;
-	}
-	public String getCartype() {
-		return cartype;
-	}
-	public void setCartype(String cartype) {
-		this.cartype = cartype;
-	}
-	public String getCarnumber() {
-		return carnumber;
-	}
-	public void setCarnumber(String carnumber) {
-		this.carnumber = carnumber;
-	}
-	public Integer getIntegral() {
-		return integral;
-	}
-	public void setIntegral(Integer integral) {
-		this.integral = integral;
-	}
-	public BigDecimal getBalance() {
-		return balance;
-	}
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public Chargingpile getChargingpile() {
-		return chargingpile;
-	}
-	public void setChargingpile(Chargingpile chargingpile) {
-		this.chargingpile = chargingpile;
-	}
-	public Schedule getSchedule() {
-		return schedule;
-	}
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
-	}
-	public Date getCreate_time() {
-		return create_time;
-	}
-	public void setCreate_time(Date create_time) {
-		this.create_time = create_time;
-	}
-
 	@Override
 	public String toString() {
-		return "User [uid=" + uid + ", username=" + username + ", imageaddress=" + imageaddress + ", cartype=" + cartype
-				+ ", carnumber=" + carnumber + ", integral=" + integral + ", balance=" + balance + ", password="
-				+ password + ", address=" + address + ", chargingpile=" + chargingpile + ", schedule=" + schedule
-				+ ", create_time=" + create_time + ", order=" + Arrays.toString(order) + ", comment="
-				+ Arrays.toString(comment) + ", reply=" + Arrays.toString(reply) + "]";
+		return "User [uid=" + uid + ", uuid=" + uuid + ", username=" + username + ", imageaddress=" + imageaddress
+				+ ", cartype=" + cartype + ", carnumber=" + carnumber + ", integral=" + integral + ", balance="
+				+ balance + ", password=" + password + ", address=" + address + ", chargingpile=" + chargingpile
+				+ ", schedule=" + schedule + ", create_time=" + create_time + ", order=" + Arrays.toString(order)
+				+ ", comment=" + Arrays.toString(comment) + ", reply=" + Arrays.toString(reply) + "]";
 	}
 	
 }	

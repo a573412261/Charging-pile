@@ -13,6 +13,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.alibaba.fastjson.JSONObject;
 import com.mchange.v2.c3p0.impl.NewPooledConnection;
 
 import cn.com.bean.Message;
@@ -89,18 +90,46 @@ public class UserServlet extends BaseServlet {
 	/**
 	 * 场景：加入新用户
 	 * 输入：用户信息（均可选）
-	 * 输出：确认码
+	 * 输出：
+	 * 	成功：确认码，uuid
+	 * 	失败：失败原因
 	 * 数据库：user表中增加一条记录
 	 * @param request
 	 * @param response
-	 * @throws IOException
+	 * @throws Exception
 	 */
 	public void insertuser(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		try {
 			//获取数据对象user
 			User user = MultiplexUtils.getparams(request, response, User.class);
 			//将user插入数据库
-			userService.add(user);
+			String uuid = userService.add(user);
+			//操作成功，返回 {"result":"1"}
+			JSONObject jsonObject = new Message(SUCCESS).getJsonMessage();
+			jsonObject.put("uuid", uuid);
+			response.getWriter().print(jsonObject);
+		} catch (Message e) {
+			// 异常打印信息 {"result":"xxx"}
+			response.getWriter().print(e.getJsonMessage());
+		}
+	}
+	
+	/**
+	 * 场景：修改用户信息
+	 * 输入：uuid必选,其他均可选
+	 * 输出：
+	 * 	成功：确认码
+	 * 	失败：失败原因
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void updateuser(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		try {
+			//获取数据对象user
+			User user = MultiplexUtils.getparams(request, response, User.class);
+			//更新数据库中user的信息
+			userService.update(user);
 			//操作成功，返回 {"result":"1"}
 			response.getWriter().print(new Message(SUCCESS).getJsonMessage());
 		} catch (Message e) {

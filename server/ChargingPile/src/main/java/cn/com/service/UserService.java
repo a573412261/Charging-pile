@@ -13,8 +13,13 @@ public class UserService {
 	 * @param user
 	 * @throws SQLException 
 	 */
-	public void add(User user) throws Message {
+	public String add(User user) throws Message {
 		// TODO Auto-generated method stub
-		UserDao.add(user);
+		return UserDao.add(user);
+	}
+
+	public void update(User user) throws Message {
+		// TODO Auto-generated method stub
+		UserDao.update(user);
 	}
 }
