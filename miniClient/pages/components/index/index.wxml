@@ -1,6 +1,34 @@
 <!-- index.html -->
-<text> index.html </text> 
-<button type="primary" loading="true">ceshi</button>
+<!-- 头部 -->
+
+
+<view class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}" id="searchBar">
+<!-- 搜索框 -->
+<form class="weui-search-bar__form" >
+  <view class="weui-search-bar__box">
+    <i class="weui-icon-search"></i>
+              <input type="text" class="weui-search-bar__input" placeholder="搜索充电柱" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+              <span class="weui-icon-clear" wx:if="{{inputVal.length > 0}}"bindtap="clearInput"></span>
+  </view >
+
+  </form>
+        
+<!-- 扫一扫 -->
+    <view class="btn_scan">
+          <image class="btn_scan" src="../../../image/扫一扫.jpg" style="width:66rpx;height:60rpx" bindtap="openToast" ></image>
+
+<!-- toast弹窗-->
+        <view class="fadeIn {{hideToast ? 'fadeOut' : ''}}" wx:if="{{toast}}">
+          <view class="weui-mask_transparent"></view>
+            <view class="weui-toast">
+                <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+                <view class="weui-toast__content">成功</view>
+            </view>
+        </view>
+    </view>
+       <!-- <view class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view> -->
+</view>
+
 
 <!-- 以下是创建时的参考 -->
 <!--index.wxml  

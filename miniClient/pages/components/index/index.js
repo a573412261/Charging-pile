@@ -6,7 +6,47 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    inputShowed: false,
+    inputVal: ""
+  },
+
+  showInput: function () {
+    this.setData({
+      inputShowed: true
+    });
+  },
+  hideInput: function () {
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+  },
+  clearInput: function () {
+    this.setData({
+      inputVal: ""
+    });
+  },
+  inputTyping: function (e) {
+    this.setData({
+      inputVal: e.detail.value
+    });
+  }, 
+  
+  openToast: function () {
+    this.setData({
+      toast: true
+    });
+    setTimeout(() => {
+      this.setData({
+        hideToast: true
+      });
+      setTimeout(() => {
+        this.setData({
+          toast: false,
+          hideToast: false,
+        });
+      }, 300);
+    }, 3000);
   },
 
   /**

@@ -1,8 +1,25 @@
 /**index.wxss**/
 
+.weui-search-bar{
+  background-color: rgb(255, 255, 255);  
+  border: solid 1px;
+  border-color: rgba(187, 187, 187, 1);
+  text-align: left,center; 
+}
 
+.weui-search-bar__box{
+    width: 500rpx;
+    left: 50rpx;
+    border-radius: 35rpx;
+    background-color: rgba(231, 230, 230, 0.79);
+    color: rgba(117, 114, 114, 0.38);
+}
 
-
+.btn_scan{
+  width: 50rpx;
+  height: 50rpx; 
+  margin-right:50rpx;
+}
 
 /*以下是创建项目时的参考*/
 /*.userinfo {
