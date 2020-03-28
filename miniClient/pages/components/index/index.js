@@ -7,9 +7,22 @@ Page({
    */
   data: {
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+    
+    latitude:0 ,
+    longitude: 0, 
+    accuracy:0,
+    markers: [{ // 绘制浮标，传入JSON支持多个
+      iconPath: "/image/location.png", //浮标图片路径，推荐png图片
+      id: 0, // Id支持多个，方便后期点击浮标获取相关信息
+      latitude: 23.099994, // 经度
+      longitude: 113.324520, //纬度
+      width: 50, // 浮标宽度
+      height: 50 // 浮标高度
+    }]
   },
-
+/*输入框的显示设置
+*/
   showInput: function () {
     this.setData({
       inputShowed: true
@@ -31,7 +44,8 @@ Page({
       inputVal: e.detail.value
     });
   }, 
-  
+/*弹窗，应该设置成一个单独的组件，放到common
+*/
   openToast: function () {
     this.setData({
       toast: true
@@ -49,11 +63,37 @@ Page({
     }, 3000);
   },
 
+/*获取用户当前位置
+*/
+  getLoc:function(){
+    let that=this
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        console.log(res)
+        if(res){  
+          that.setData({
+            latitude:res.latitude,
+            longitude:res.longitude,
+            accuracy:res.accuracy,
+            markers: [{id: 1,
+              iconPath: '../../../image/location.png',
+              latitude: res.latitude,
+              longitude: res.longitude,
+              width: 40,
+              height: 40}]
+          }
+          )
+        }
+      },
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.getLoc();
   },
 
   /**

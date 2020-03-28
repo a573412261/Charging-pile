@@ -1,4 +1,9 @@
 /**index.wxss**/
+.container{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
 
 .weui-search-bar{
   background-color: rgb(255, 255, 255);  
@@ -19,6 +24,11 @@
   width: 50rpx;
   height: 50rpx; 
   margin-right:50rpx;
+}
+
+.nav_map{
+  width: 100%;
+  height: 100%;
 }
 
 /*以下是创建项目时的参考*/
