@@ -1,16 +1,16 @@
 {
   "pages": [
     "pages/components/index/index",
-    "pages/components/me/me",
+    "pages/components/user/user",
     "pages/components/shop/shop", 
     "pages/components/login/login", 
     "pages/components/logs/logs"
     
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-   
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#48D1CC",
+    
     "navigationBarTextStyle": "black"
   },
 
@@ -29,7 +29,7 @@
       "selectedIconPath": "/icons/主页2.jpg"
     },
     {
-      "pagePath": "pages/components/me/me",
+      "pagePath": "pages/components/user/user",
       "text": "我",
       "iconPath": "icons/我1.jpg",
       "selectedIconPath": "icons/我2.jpg"

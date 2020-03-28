@@ -1,0 +1,90 @@
+
+<view class="uesr_info_wrap">
+    <view wx:if="{{userinfo.avatarUrl}}" class="user_img_wrap">
+        <image class="user_bg" src="{{userinfo.avatarUrl}}"></image>
+        <view class="user_info">
+            <image class="user_icon" src="{{userinfo.avatarUrl}}"></image>
+            <view class="user_name">
+                {{userinfo.nickName}}
+            </view>
+        </view>  
+    </view>
+    <view wx:else class="user_btn">
+        <navigator url="/pages/components/login/login">登录</navigator>
+    </view>
+</view>
+
+<view class="user_content">
+    <view class="user_main">
+
+        <!-- <view class="user_item_wrap">
+            <view class="user_name">
+                <text>用户名</text>
+                <text>{{userinfo.nickName}}</text>
+            </view>
+
+            <view class="user_item">
+                <navigator url="">
+                    <view class="some_info">我的车</view>
+                </navigator>
+            </view>
+            <view class="user_item">
+                <navigator url="">
+                    <view class="some_info">我的积分</view>
+                </navigator>
+            </view>
+            <view class="user_item">
+                <navigator url="">
+                    <view class="some_info">我的余额</view>
+                </navigator>
+            </view>
+            <view class="user_item">
+                <navigator url="">
+                    <view class="some_info">用户地址管理</view>
+                </navigator>
+            </view>
+        </view> -->
+
+        <!-- <view class="app_info_wrap">
+            <navigator url="">
+                <view class="app_info_item">关于</view>
+            </navigator>
+        </view> -->
+
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">用户名</view>
+                <view class="weui-cell__ft">{{userinfo.nickName}}</view>
+            </view>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">我的车</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">我的积分</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">我的余额</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">我的地址</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">*接口返回</view>
+            </navigator>
+        </view>
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">用户反馈</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">关于</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+        </view>
+
+    </view>
+</view>

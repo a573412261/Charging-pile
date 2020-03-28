@@ -1,0 +1,103 @@
+/* pages/user/index.wxss */
+page{
+    background-color: #edece8;
+}
+
+.uesr_info_wrap{
+    height: 45vh;
+    overflow: hidden;
+    background-color: #48D1CC;
+    position: relative;
+    .user_img_wrap{
+        position: relative;
+        .user_bg{
+            height: 50vh;
+            // 高斯模糊
+            filter: blur(10rpx);
+        }
+        .user_info{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20%;
+            text-align: center;
+            .user_icon{
+                width: 200rpx;
+                height: 200rpx;
+                border-radius: 50%;
+            }
+            .user_name{
+                color: black;
+                margin-top: 40rpx;
+                font-size: 40rpx;
+            }
+        }
+
+    }
+
+    .user_btn{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 40%;
+        // transform: translateY(-50%);
+        border: 1rpx solid white;
+        color: white;
+        font-size: 38rpx;
+        padding: 30rpx;
+        border-radius: 10rpx;
+    }
+}
+
+.user_content{
+    position: relative;
+    .user_main{
+        padding-bottom: 100rpx;
+        position: absolute;
+        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        
+        // .user_item_wrap{
+        //     background-color: #fff;
+        //     margin-top: 20rpx;
+        //     .user_name{
+        //         padding: 20rpx;
+        //         border-bottom: 1rpx solid #ccc;
+        //         display: flex;
+        //         justify-content: space-between;
+        //     }
+        //     .user_item{
+        //         padding: 20rpx;
+        //         border-bottom: 1rpx solid #ccc;
+        //         navigetor{
+        //             .some_info{}
+        //         }
+        //     }
+        // }
+        // .app_info_wrap{
+        //     margin-top: 30rpx;
+        //     background-color: #fff;
+        //     .app_info_item{
+        //         padding: 20rpx;
+        //         border-bottom: 1rpx solid #ccc;
+        //     }
+        // }
+
+
+        .weui-cells_after-title{
+            .weui-cell{
+                height: 100rpx;
+            }
+        }
+
+        .weui-cells_after-title{
+            .weui-cell_access{
+                height: 100rpx;
+            }
+        }
+        
+       
+
+    }
+}

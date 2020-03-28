@@ -1,6 +1,10 @@
 @import "weui.wxss";
 
 page,view,image,swiper,swiper-item,navigator,form{
-  box-sizing:border-box
+  box-sizing:border-box;
+}
+
+image{
+  width: 100%;
 }
 

@@ -1,0 +1,61 @@
+/* pages/user/index.wxss */
+page {
+  background-color: #edece8;
+}
+.uesr_info_wrap {
+  height: 45vh;
+  overflow: hidden;
+  background-color: #48D1CC;
+  position: relative;
+}
+.uesr_info_wrap .user_img_wrap {
+  position: relative;
+}
+.uesr_info_wrap .user_img_wrap .user_bg {
+  height: 50vh;
+  filter: blur(10rpx);
+}
+.uesr_info_wrap .user_img_wrap .user_info {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20%;
+  text-align: center;
+}
+.uesr_info_wrap .user_img_wrap .user_info .user_icon {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+}
+.uesr_info_wrap .user_img_wrap .user_info .user_name {
+  color: black;
+  margin-top: 40rpx;
+  font-size: 40rpx;
+}
+.uesr_info_wrap .user_btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40%;
+  border: 1rpx solid white;
+  color: white;
+  font-size: 38rpx;
+  padding: 30rpx;
+  border-radius: 10rpx;
+}
+.user_content {
+  position: relative;
+}
+.user_content .user_main {
+  padding-bottom: 100rpx;
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.user_content .user_main .weui-cells_after-title .weui-cell {
+  height: 100rpx;
+}
+.user_content .user_main .weui-cells_after-title .weui-cell_access {
+  height: 100rpx;
+}
