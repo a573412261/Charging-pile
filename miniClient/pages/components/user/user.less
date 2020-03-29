@@ -6,20 +6,21 @@ page{
 .uesr_info_wrap{
     height: 45vh;
     overflow: hidden;
-    background-color: #48D1CC;
+    background-color: white;
     position: relative;
     .user_img_wrap{
         position: relative;
-        .user_bg{
-            height: 50vh;
-            // 高斯模糊
-            filter: blur(10rpx);
-        }
+        // .user_bg{
+        //     height: 50vh;
+        //     // 高斯模糊
+        //     filter: blur(10rpx);
+        // }
         .user_info{
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            top: 20%;
+            // top: 20%;
+            top: 10vh;
             text-align: center;
             .user_icon{
                 width: 200rpx;
@@ -35,17 +36,28 @@ page{
 
     }
 
-    .user_btn{
+    // .user_btn{
+    //     position: absolute;
+    //     left: 50%;
+    //     transform: translateX(-50%);
+    //     top: 40%;
+    //     // transform: translateY(-50%);
+    //     border: 1rpx solid white;
+    //     color: white;
+    //     font-size: 38rpx;
+    //     padding: 30rpx;
+    //     border-radius: 10rpx;
+    // }
+
+    .box{
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        top: 40%;
-        // transform: translateY(-50%);
-        border: 1rpx solid white;
-        color: white;
+        top: 30%;
+        height: 10vh;
+        width: 20vh;
         font-size: 38rpx;
-        padding: 30rpx;
-        border-radius: 10rpx;
+        padding-top: 30rpx;
     }
 }
 

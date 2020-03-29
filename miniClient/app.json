@@ -9,12 +9,14 @@
   ],
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#48D1CC",
+    "navigationBarBackgroundColor": "#fff",
     
     "navigationBarTextStyle": "black"
   },
 
   "tabBar": {
+    "color": "#999",
+    "selectedColor": "#48D1CC",
     "list": [
     {
       "pagePath": "pages/components/shop/shop",

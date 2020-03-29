@@ -12,5 +12,11 @@ Page({
     this.setData({
       userinfo
     });
+  },
+
+  goToLogin:function (options){
+    wx.navigateTo({
+      url: '/pages/components/login/login',
+    });
   }
 })

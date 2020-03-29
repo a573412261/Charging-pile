@@ -1,7 +1,7 @@
 
 <view class="uesr_info_wrap">
     <view wx:if="{{userinfo.avatarUrl}}" class="user_img_wrap">
-        <image class="user_bg" src="{{userinfo.avatarUrl}}"></image>
+        <!-- <image class="user_bg" src="{{userinfo.avatarUrl}}"></image> -->
         <view class="user_info">
             <image class="user_icon" src="{{userinfo.avatarUrl}}"></image>
             <view class="user_name">
@@ -9,9 +9,10 @@
             </view>
         </view>  
     </view>
-    <view wx:else class="user_btn">
+    <!-- <view wx:else class="user_btn">
         <navigator url="/pages/components/login/login">登录</navigator>
-    </view>
+    </view> -->
+    <button wx:else type="primary" class="box"  bindtap="goToLogin">登录</button>
 </view>
 
 <view class="user_content">
