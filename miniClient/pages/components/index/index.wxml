@@ -13,9 +13,8 @@
     </form>
           
   <!-- 扫一扫 -->
-    <view class="btn_scan">
-          <image class="btn_scan" src="../../../image/扫一扫.jpg" style="width:66rpx;height:60rpx" bindtap="wxScan" ></image>
-    </view> 
+    <image class="btn_scan" src="../../../image/scan.jpg" style="width:66rpx;height:66rpx" bindtap="wxScan" ></image>
+     
   </view>
 
   <view class="nav_map">
