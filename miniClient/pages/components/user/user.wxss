@@ -5,21 +5,17 @@ page {
 .uesr_info_wrap {
   height: 45vh;
   overflow: hidden;
-  background-color: #48D1CC;
+  background-color: white;
   position: relative;
 }
 .uesr_info_wrap .user_img_wrap {
   position: relative;
 }
-.uesr_info_wrap .user_img_wrap .user_bg {
-  height: 50vh;
-  filter: blur(10rpx);
-}
 .uesr_info_wrap .user_img_wrap .user_info {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 20%;
+  top: 10vh;
   text-align: center;
 }
 .uesr_info_wrap .user_img_wrap .user_info .user_icon {
@@ -32,16 +28,15 @@ page {
   margin-top: 40rpx;
   font-size: 40rpx;
 }
-.uesr_info_wrap .user_btn {
+.uesr_info_wrap .box {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 40%;
-  border: 1rpx solid white;
-  color: white;
+  top: 30%;
+  height: 10vh;
+  width: 20vh;
   font-size: 38rpx;
-  padding: 30rpx;
-  border-radius: 10rpx;
+  padding-top: 30rpx;
 }
 .user_content {
   position: relative;

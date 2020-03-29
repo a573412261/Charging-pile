@@ -21,8 +21,6 @@
 }
 
 .btn_scan{
-  width: 50rpx;
-  height: 50rpx; 
   margin-right:50rpx;
 }
 

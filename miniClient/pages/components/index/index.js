@@ -9,9 +9,11 @@ Page({
     inputShowed: false,
     inputVal: "",
     
-    latitude:0 ,
-    longitude: 0, 
+    latitude: 23.099994,
+    longitude: 113.324520,
     accuracy:0,
+   
+    subkey: '', //未申请
     markers: [{ // 绘制浮标，传入JSON支持多个
       iconPath: "/image/location.png", //浮标图片路径，推荐png图片
       id: 0, // Id支持多个，方便后期点击浮标获取相关信息
@@ -21,6 +23,7 @@ Page({
       height: 50 // 浮标高度
     }]
   },
+
 /*输入框的显示设置
 */
   showInput: function () {
@@ -44,8 +47,17 @@ Page({
       inputVal: e.detail.value
     });
   }, 
+
+  wxScan:function(){
+    wx.scanCode({
+      success(res) {
+        console.log(res)
+      }    
+      })
+  },
+
 /*弹窗，应该设置成一个单独的组件，放到common
-*/
+
   openToast: function () {
     this.setData({
       toast: true
@@ -62,13 +74,13 @@ Page({
       }, 300);
     }, 3000);
   },
-
+*/
 /*获取用户当前位置
 */
   getLoc:function(){
     let that=this
     wx.getLocation({
-      type: 'wgs84',
+      type: 'gcj02',
       success: function(res) {
         console.log(res)
         if(res){  
@@ -76,12 +88,13 @@ Page({
             latitude:res.latitude,
             longitude:res.longitude,
             accuracy:res.accuracy,
-            markers: [{id: 1,
-              iconPath: '../../../image/location.png',
+            markers:[{
+              id: 1,
               latitude: res.latitude,
               longitude: res.longitude,
               width: 40,
-              height: 40}]
+              height: 40
+            }]
           }
           )
         }
