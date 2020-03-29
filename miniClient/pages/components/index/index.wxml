@@ -14,17 +14,8 @@
           
   <!-- 扫一扫 -->
     <view class="btn_scan">
-          <image class="btn_scan" src="../../../image/扫一扫.jpg" style="width:66rpx;height:60rpx" bindtap="openToast" ></image>
-
-  <!-- toast弹窗-->
-      <view class="fadeIn {{hideToast ? 'fadeOut' : ''}}" wx:if="{{toast}}">
-        <view class="weui-mask_transparent"></view>
-          <view class="weui-toast">
-              <i class="weui-icon-success-no-circle weui-icon_toast"></i>
-              <view class="weui-toast__content">成功</view>
-          </view>
-      </view>
-    </view>
+          <image class="btn_scan" src="../../../image/扫一扫.jpg" style="width:66rpx;height:60rpx" bindtap="wxScan" ></image>
+    </view> 
   </view>
 
   <view class="nav_map">
@@ -44,6 +35,15 @@
 
 
 
+
+  <!-- toast弹窗-->
+      <!-- <view class="fadeIn {{hideToast ? 'fadeOut' : ''}}" wx:if="{{toast}}">
+        <view class="weui-mask_transparent"></view>
+          <view class="weui-toast">
+              <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+              <view class="weui-toast__content">成功</view>
+          </view>
+  </view>-->
 
 <!-- 以下是创建时的参考 -->
 <!--index.wxml  

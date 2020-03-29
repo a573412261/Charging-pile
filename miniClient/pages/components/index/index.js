@@ -12,6 +12,7 @@ Page({
     latitude: 23.099994,
     longitude: 113.324520,
     accuracy:0,
+   
     subkey: '', //未申请
     markers: [{ // 绘制浮标，传入JSON支持多个
       iconPath: "/image/location.png", //浮标图片路径，推荐png图片
@@ -22,6 +23,7 @@ Page({
       height: 50 // 浮标高度
     }]
   },
+
 /*输入框的显示设置
 */
   showInput: function () {
@@ -45,8 +47,17 @@ Page({
       inputVal: e.detail.value
     });
   }, 
+
+  wxScan:function(){
+    wx.scanCode({
+      success(res) {
+        console.log(res)
+      }    
+      })
+  },
+
 /*弹窗，应该设置成一个单独的组件，放到common
-*/
+
   openToast: function () {
     this.setData({
       toast: true
@@ -63,7 +74,7 @@ Page({
       }, 300);
     }, 3000);
   },
-
+*/
 /*获取用户当前位置
 */
   getLoc:function(){
