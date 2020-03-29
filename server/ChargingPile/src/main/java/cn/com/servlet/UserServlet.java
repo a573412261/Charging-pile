@@ -2,7 +2,6 @@ package cn.com.servlet;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import com.alibaba.fastjson.JSONObject;
-import com.mchange.v2.c3p0.impl.NewPooledConnection;
-
 import cn.com.bean.Message;
 import cn.com.bean.User;
 import cn.com.service.UserService;
