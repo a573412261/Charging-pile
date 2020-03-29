@@ -92,9 +92,10 @@ public class UserServlet extends BaseServlet {
 	 * 数据库：user表中增加一条记录
 	 * @param request
 	 * @param response
+	 * @throws IOException 
 	 * @throws Exception
 	 */
-	public void insertuser(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public void insertuser(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		try {
 			//获取数据对象user
 			User user = MultiplexUtils.getparams(request, response, User.class);
