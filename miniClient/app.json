@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/components/load/load",
     "pages/components/signup/signup",
     "pages/components/signin/signin",

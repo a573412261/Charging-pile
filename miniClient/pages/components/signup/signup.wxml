@@ -1,5 +1,5 @@
 <!--pages/components/signup/signup.wxml-->
-<view class="signin">
+<view class="signup">
   <view class="username">
     <input class="inputs" placeholder="用户名" placeholder-class="plas" type="text"></input>
   </view>

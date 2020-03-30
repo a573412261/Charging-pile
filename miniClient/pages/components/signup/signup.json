@@ -1,6 +1,6 @@
 {
   "usingComponents": {},
   "navigationBarBackgroundColor":"#FaFaFa",
-  "navigationBarTitleText":"车主登陆",
+  "navigationBarTitleText":"车主登录",
   "navigationBarTextStyle":"black"
 }
