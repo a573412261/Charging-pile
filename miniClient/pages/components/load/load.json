@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationBarBackgroundColor":"#FaFaFa",
+  "navigationBarTitleText":"微信授权",
+  "navigationBarTextStyle":"black"
+}

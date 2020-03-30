@@ -1,0 +1,8 @@
+<!--pages/components/load/load.wxml-->
+<!-- 需要使用 button 来授权登录 -->
+<view wx:if="{{canIUse}}" class="Authorzation"> 
+  <button class="button" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+  <view class="line">----------------------------------</view>
+  <view class="notice">\t\t欢迎使用小程序，我们需要一些您的公开信息，包括微信昵称、头像等。请放心，我们会妥善保管您的信息。</view>
+</view>
+<view wx:else>请升级微信版本</view>

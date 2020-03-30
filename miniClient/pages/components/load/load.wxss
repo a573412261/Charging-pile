@@ -1,0 +1,37 @@
+/* pages/components/load/load.wxss */
+.Authorzation{
+  width:80%;
+  height:100rpx;
+  margin-top: 150rpx;
+  margin-left:10%;
+  margin-right: 10%;
+}
+
+.button{
+  width:70%;
+  height:80rpx;
+  background-color: #48D1CC ;
+  border-radius: 10rpx;
+  align-content: center;
+  text-align: center;
+  margin-left: 15%;
+  margin-right: 15%;
+  color:white;
+  font-size: 37rpx;
+  font-weight: bold;
+}
+
+.line{
+  color:#8a8a8a;
+  font-size:40rpx;
+  text-align: cebter;
+  margin-top:20rpx;
+}
+.notice{
+  width:92%;
+  color:"#8a8a8a";
+  font-size:20rpx ;
+  font-weight: 10rpx;
+  margin-top:10rpx;
+  margin:auto;
+}

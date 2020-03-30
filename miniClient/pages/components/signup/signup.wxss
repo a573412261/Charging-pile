@@ -1,0 +1,70 @@
+/* pages/components/signup/signup.wxss */
+page{
+  left: 0rpx;
+  right: 0rpx;
+  background-color: white;
+}
+.username{
+  width: 94%;
+  height:80rpx;
+  margin-top: 80rpx;
+  margin-left: 3%;
+  margin-right: 3%;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #F2F2F2;
+}
+.plas{
+  font-size: 30rpx;
+  color: #CCCCCC;
+}
+
+.inputs{
+  line-height: 100rpx;
+  font-size: 30rpx;
+  color: black;
+  margin:auto;
+  margin-left:20rpx;
+  width:100%;
+}
+.pw{
+  width: 94%;
+  height:80rpx;
+  margin-top: 30rpx;
+  margin-left: 3%;
+  margin-right: 3%;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #F2F2F2;
+}
+.signupclick{
+  width: 94%;
+  height:100rpx;
+  line-height: 100rpx;
+  margin: auto;
+  margin-top: 80rpx;
+  margin-left: 3%;
+  margin-right: 3%;
+  text-align: center;
+  background-color: #48D1CC;
+  font-size: 33rpx;
+  color:white;
+}
+.signin{
+  width:90%;
+  height:50rpx;
+  margin:auto;
+  margin-top: 30rpx;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+.words{
+  color:black;
+  font-size: 28rpx;
+  margin-left:15rpx;
+  font-family:Microsoft Yahei；
+}

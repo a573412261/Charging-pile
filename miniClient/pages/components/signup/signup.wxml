@@ -1,0 +1,16 @@
+<!--pages/components/signup/signup.wxml-->
+<view class="signin">
+  <view class="username">
+    <input class="inputs" placeholder="用户名" placeholder-class="plas" type="text"></input>
+  </view>
+
+   <view class="pw">
+    <input class="inputs" placeholder="登陆密码" placeholder-class="plas" type="password"></input>
+  </view>
+
+  <view class="signupclick">登录</view>
+  <view class="signin">
+   <text class="words">没有账号，点此注册</text>
+  </view>
+</view>
+
