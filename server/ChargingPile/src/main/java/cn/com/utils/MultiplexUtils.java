@@ -43,7 +43,7 @@ public class MultiplexUtils {
 			        Map parseObject = JSON.parseObject(paramJson, Map.class);
 					return CommonUtils.toBean(parseObject,clazz);
 				}else {
-					System.out.println("提交的数据不是application/json格式");
+					System.out.println("提交的数据不是application/json格式:"+contentType);
 				}
 	        // json格式 (get方式)
 	        else if(METHOD_GET.equals(request.getMethod()))
@@ -57,7 +57,7 @@ public class MultiplexUtils {
 					}
 	        		return CommonUtils.toBean(map,clazz);
 	        	}else {
-					System.out.println("提交的数据不是application/json格式");
+					System.out.println("提交的数据不是application/json格式:"+contentType);
 				}
 	        return null;
 		} catch (Exception e) {
