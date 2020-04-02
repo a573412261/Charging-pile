@@ -48,13 +48,10 @@ public class UserDao {
 	public static void update(User user) throws Message {
 		// TODO Auto-generated method stub
 		try {
-			String sql = "update user set username=?,imageaddress=?,cartype=?,"
-					+ "carnumber=?,integral=?,balance=?,password=?,address=?,cid=?,"
-					+ "sid=? where uuid=?";
-			Object paramObject[] = getparamObject(user);  
-			ArrayList<Object> arrayList = new ArrayList<Object>(Arrays.asList(paramObject));
-			arrayList.add(user.getUuid());
-			int result = qr.update(sql,arrayList.toArray());
+			String sql = "update user set username=?,cartype=?,"
+					+ "carnumber=?,address=? where uuid=?";
+			Object params[] = {user.getUsername(),user.getCartype(),user.getCarnumber(),user.getAddress(),user.getUuid()};
+			int result = qr.update(sql,params);
 			if(result>0) {
 				System.out.println("操作数据库成功，影响行数："+result);
 			}

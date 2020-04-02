@@ -12,7 +12,11 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.alibaba.fastjson.JSONObject;
+import com.mysql.cj.ParseInfo;
+
+import cn.com.bean.Chargingpile;
 import cn.com.bean.Message;
+import cn.com.bean.Schedule;
 import cn.com.bean.User;
 import cn.com.service.UserService;
 import cn.com.utils.BaseServlet;
@@ -125,6 +129,24 @@ public class UserServlet extends BaseServlet {
 		try {
 			//获取数据对象user
 			User user = MultiplexUtils.getparams(request, response, User.class);
+			//处理sid和cid
+//			String cidString,sidString;
+//			cidString = request.getParameter("cid");
+//			sidString = request.getParameter("sid");
+//			if(cidString!=null) {
+//				int cid = Integer.parseInt(cidString);
+//				Chargingpile chargingpile = new Chargingpile();
+//				chargingpile.setCid(cid);
+//				user.setChargingpile(chargingpile);
+//				System.out.println("获取到cid参数了！！！");
+//			}
+//			if(sidString!=null) {
+//				int sid = Integer.parseInt(sidString);
+//				Schedule schedule = new Schedule();
+//				schedule.setSid(sid);
+//				user.setSchedule(schedule);
+//				System.out.println("获取到sid参数了！！！");
+//			}
 			//更新数据库中user的信息
 			userService.update(user);
 			//操作成功，返回 {"result":"1"}
