@@ -29,4 +29,9 @@ public class UserService {
 		UserDao.Chargingmoney(uuid, money);
 		return UserDao.querymoney(uuid);
 	}
+	
+	public void updatepassword(String uuid, String password, String newpassword) throws Message {
+		// TODO Auto-generated method stub
+		UserDao.updatepassword(uuid, password, newpassword);
+	}	
 }

@@ -190,4 +190,38 @@ public class UserServlet extends BaseServlet {
 			response.getWriter().print(e.getJsonMessage());
 		}
 	}
+	
+	/**
+	 * 场景：修改用户密码
+	 * 输入：uuid、原密码、新密码必选
+	 * 输出：
+	 * 	成功：确认码
+	 * 	失败：失败原因
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */	
+	public void updatepassworduser(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		try {
+			//获取数据对象		
+			JSONObject jsonobject = MultiplexUtils.getUandM(request, response);
+			String newpassword = jsonobject.getString("newpassword");
+			String password = jsonobject.getString("password");
+			String uuid = jsonobject.getString("uuid");
+			if(newpassword!=null && password!=null && uuid!=null) {
+				//更新数据库中user的密码
+				userService.updatepassword(uuid, password, newpassword);
+				//操作成功，返回 {"result":"1"}
+				response.getWriter().print(new Message(SUCCESS).getJsonMessage());				
+			}
+			else {
+				//如果为空，打印信息
+				System.out.println (" 没有传输newpassword /password /uuid！   ");
+			}
+
+		} catch (Message e) {
+			// 异常打印信息 {"result":"xxx"}
+			response.getWriter().print(e.getJsonMessage());
+		}
+	}
 }

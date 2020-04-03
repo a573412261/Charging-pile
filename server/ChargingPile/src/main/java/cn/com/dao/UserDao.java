@@ -112,6 +112,31 @@ public class UserDao {
 		}
 		
 	}
+	
+	
+	/**
+	 * 执行修改user表用户密码的语句
+	 * 修改数据库中user的密码
+	 * @param user	
+	 * @throws Message
+	 */
+	
+	public static void updatepassword(String uuid, String password, String newpassword) throws Message {
+		// TODO Auto-generated method stub
+		//	System.out.println ("newpassword: " +newpassword +"; password:" +password +"; uuid:" +uuid );
+		try {
+			String sql = "update user set password= '"+newpassword+"' where uuid='"+ uuid +"' and password= '"+ password +"'";
+			int result = qr.update(sql);
+			if(result>0) {
+				System.out.println("操作数据库成功，影响行数："+result);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Message("用户密码修改失败");	
+		}		
+	}	
+	
 	private static Object[] getparamObject(User user) {
 		Object cid,sid;
 		if(user.getChargingpile()!=null)
