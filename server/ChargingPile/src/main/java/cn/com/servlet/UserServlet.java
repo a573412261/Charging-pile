@@ -117,7 +117,7 @@ public class UserServlet extends BaseServlet {
 	
 	/**
 	 * 场景：修改用户信息
-	 * 输入：uuid必选,其他均可选
+	 * 输入：uuid,username,cartype,carnumber,address必填
 	 * 输出：
 	 * 	成功：确认码
 	 * 	失败：失败原因
