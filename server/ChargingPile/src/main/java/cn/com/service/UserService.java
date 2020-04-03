@@ -1,5 +1,6 @@
 package cn.com.service;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import cn.com.bean.Message;
@@ -21,5 +22,11 @@ public class UserService {
 	public void update(User user) throws Message {
 		// TODO Auto-generated method stub
 		UserDao.update(user);
+	}
+	
+	public BigDecimal chargingmoney(String uuid,BigDecimal money) throws Message {
+		// TODO Auto-generated method stub
+		UserDao.Chargingmoney(uuid, money);
+		return UserDao.querymoney(uuid);
 	}
 }

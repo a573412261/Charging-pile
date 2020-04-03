@@ -2,6 +2,7 @@ package cn.com.servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -151,6 +152,39 @@ public class UserServlet extends BaseServlet {
 			userService.update(user);
 			//操作成功，返回 {"result":"1"}
 			response.getWriter().print(new Message(SUCCESS).getJsonMessage());
+		} catch (Message e) {
+			// 异常打印信息 {"result":"xxx"}
+			response.getWriter().print(e.getJsonMessage());
+		}
+	}
+	
+	/**
+	 * 场景：用户充值
+	 * 输入：uuid，充值的金额money
+	 * 输出：
+	 * 	成功：确认码，充值后的余额balance
+	 * 	失败：失败原因
+	 * 数据库：user表中增加一条记录
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws Exception
+	 */
+	public void chargingmoney(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		try {
+			//获取数据对象object对象
+			JSONObject jsonobject = MultiplexUtils.getUandM(request, response);
+			String uuid=jsonobject.getString("uuid");
+			BigDecimal money=jsonobject.getBigDecimal("money");
+			//更新数据库中user的余额并返回余额
+			BigDecimal balance=userService.chargingmoney(uuid, money);
+			//操作成功，返回 {"result":"1"}
+			response.getWriter().print(new Message(SUCCESS).getJsonMessage());
+			//把原本就有的uuid money去掉。不用再新建一个新的jsonobject
+			jsonobject.clear();
+			//返回前端余额
+			jsonobject.put("balance", balance);
+			response.getWriter().print(jsonobject);
 		} catch (Message e) {
 			// 异常打印信息 {"result":"xxx"}
 			response.getWriter().print(e.getJsonMessage());
