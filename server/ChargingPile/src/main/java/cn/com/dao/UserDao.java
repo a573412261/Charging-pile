@@ -123,18 +123,32 @@ public class UserDao {
 	
 	public static void updatepassword(String uuid, String password, String newpassword) throws Message {
 		// TODO Auto-generated method stub
-		//	System.out.println ("newpassword: " +newpassword +"; password:" +password +"; uuid:" +uuid );
-		try {
-			String sql = "update user set password= '"+newpassword+"' where uuid='"+ uuid +"' and password= '"+ password +"'";
-			int result = qr.update(sql);
-			if(result>0) {
-				System.out.println("操作数据库成功，影响行数："+result);
+		try {			
+			//查看是否存在uuid和密码相对应的用户
+			String sql1 = "select count(*) from user where uuid=? and password=?";			
+			Object[] params1= {uuid,password};
+			Long result1= ((Long)(qr.query(sql1, params1, new ScalarHandler())));		
+			//判断符合条件的用户个数
+			if(result1 > 0) {
+				System.out.println("原密码与uuid相符");
+				//更新用户的密码
+				String sql2 = "update user set password= ? where uuid= ?";
+				Object[] params2= {newpassword,uuid};
+				int result2 = qr.update(sql2,params2);
+				if(result2>0)	{
+					//执行成功输出结果
+					System.out.println("操作数据库成功，影响行数："+result2);
+				}
 			}
+			else	System.out.println("原密码与uuid不符，操作失败");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			throw new Message("用户密码修改失败");	
-		}		
+			throw new Message("用户密码修改失败");
+			
+		
+		}
+		
 	}	
 	
 	/**
