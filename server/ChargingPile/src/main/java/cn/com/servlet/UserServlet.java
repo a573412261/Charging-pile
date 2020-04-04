@@ -224,4 +224,36 @@ public class UserServlet extends BaseServlet {
 			response.getWriter().print(e.getJsonMessage());
 		}
 	}
+	/**
+	 * 场景：用户预约某个时间段的充电桩
+	 * 输入：uuid、cid、sid
+	 * 输出：
+	 * 	成功：确认码
+	 * 	失败：失败原因
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void reservechargepile(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		try {
+			//获取数据对象
+			JSONObject jsonobject = MultiplexUtils.getUandM(request, response);
+			String cidString = jsonobject.getString("cid");
+			String sidString = jsonobject.getString("sid");
+			String uuid = jsonobject.getString("uuid");
+			if(cidString != null && sidString != null) {
+				Integer cid = Integer.parseInt(cidString);
+				Integer sid = Integer.parseInt(sidString);
+				Chargingpile chargingpile = new Chargingpile();
+				chargingpile.setCid(cid);
+				chargingpile.setStatus(2);
+				//修改数据库user表和chargingpile表的内容
+				userService.reserve(uuid, cid, sid,chargingpile);
+				//操作成功，返回 {"result":"1"}
+				response.getWriter().print(new Message(SUCCESS).getJsonMessage());
+			}
+		}catch(Message e) {
+			response.getWriter().print(e.getJsonMessage());
+		}
+	}
 }

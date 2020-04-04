@@ -137,6 +137,28 @@ public class UserDao {
 		}		
 	}	
 	
+	/**
+	 * 执行修改user表的cid和sid的语句
+	 * 执行修改chargingpile表的status的
+	 * @param uuid
+	 * @param cid
+	 * @param sid
+	 * @throws Message
+	 */
+	public static void updatecidsid(String uuid, Integer cid, Integer sid) throws Message {
+		try {
+			String sql = "update user set cid=?,sid=? where uuid=?";
+			Object params[] = {cid, sid, uuid};
+			int result = qr.update(sql,params);
+			if(result>0) {
+				System.out.println("操作数据库成功，影响行数："+result);
+			}
+		}catch(Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Message("用户cid和sid修改失败");
+		}
+	}
 	private static Object[] getparamObject(User user) {
 		Object cid,sid;
 		if(user.getChargingpile()!=null)
