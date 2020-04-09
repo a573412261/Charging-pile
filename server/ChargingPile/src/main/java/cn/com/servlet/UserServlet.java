@@ -19,6 +19,7 @@ import cn.com.bean.Chargingpile;
 import cn.com.bean.Message;
 import cn.com.bean.Schedule;
 import cn.com.bean.User;
+import cn.com.dao.UserDao;
 import cn.com.service.UserService;
 import cn.com.utils.BaseServlet;
 import cn.com.utils.CommonUtils;
@@ -252,6 +253,41 @@ public class UserServlet extends BaseServlet {
 				//操作成功，返回 {"result":"1"}
 				response.getWriter().print(new Message(SUCCESS).getJsonMessage());
 			}
+		}catch(Message e) {
+			response.getWriter().print(e.getJsonMessage());
+		}
+	}
+	/**
+	 * 场景：用户删除已经预约成功的充电桩
+	 * 输入：uuid、changedintegral
+	 * 输出：
+	 * 	成功：确认码、扣除后的积分
+	 * 	失败：失败原因
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void deletereservedchargepile(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		try {
+			JSONObject jsonobject = MultiplexUtils.getUandM(request, response);
+			String uuid = jsonobject.getString("uuid");
+			//获取要扣除的积分值
+			String changedintegralString = jsonobject.getString("deductedintegral");
+			//String类型的值转为Integer类型，同时转为负数
+			Integer changedintegral = -(Integer.parseInt(changedintegralString));
+			//查询删除预约的充电桩的cid值
+			Integer cid = UserDao.querycid(uuid);
+			Chargingpile chargingpile = new Chargingpile();
+			chargingpile.setCid(cid);
+			//修改充电桩为空闲状态
+			chargingpile.setStatus(0);
+			Integer integral = userService.deletereservedchargepileservice(uuid, changedintegral, chargingpile);
+			response.getWriter().print(new Message(SUCCESS).getJsonMessage());
+			jsonobject.clear(); 
+			//返回前端积分值
+			jsonobject.put("integral", integral);
+			response.getWriter().print(jsonobject);
+			
 		}catch(Message e) {
 			response.getWriter().print(e.getJsonMessage());
 		}

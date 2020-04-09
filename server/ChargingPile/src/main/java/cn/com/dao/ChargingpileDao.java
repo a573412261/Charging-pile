@@ -1,8 +1,5 @@
 package cn.com.dao;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import cn.com.bean.Chargingpile;
 import cn.com.bean.Message;
 import cn.com.jdbc.TxQueryRunner;

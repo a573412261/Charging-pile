@@ -1,6 +1,7 @@
 package cn.com.dao;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -95,11 +96,13 @@ public class UserDao {
 	 * @String uuid
 	 * @throws Message
 	 */
+	
+	
 	public static BigDecimal querymoney(String uuid) throws Message {
 		// TODO Auto-generated method stub
 		try {
 			String sql = "select balance from user where uuid=?"; 
-			BigDecimal result = qr.query(sql,uuid,new ScalarHandler());
+			BigDecimal result = qr.query(sql,uuid,new ScalarHandler<BigDecimal>());
 			if(result != null) {
 				System.out.println(result);
 				return result;
@@ -158,6 +161,77 @@ public class UserDao {
 			e.printStackTrace();
 			throw new Message("用户cid和sid修改失败");
 		}
+	}
+	
+	/**
+	 * 执行修改user表的integral的语句
+	 * 根据uuid修改user表中的integral
+	 * @param uuid
+	 * @param changedintegral
+	 * @throws Message
+	 */
+	public static void updateintegral(String uuid, Integer changedintegral) throws Message {
+		
+		try {
+			String sql = "update user set integral=integral+? where uuid=?";
+			Object params[] = {changedintegral, uuid};
+			int result = qr.update(sql,params);
+			if(result>0) {
+				System.out.println("操作数据库成功，影响行数："+result);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new Message("用户积分修改失败");
+		}
+		
+	}
+	/**
+	 * 执行查询user表的语句
+	 * 根据uuid查询user表的cid值
+	 * @param uuid
+	 * @return
+	 * @throws Message
+	 */
+	public static Integer querycid(String uuid) throws Message {
+		try {
+			String sql = "select cid from user where uuid=?";
+			Integer result = qr.query(sql, uuid, new ScalarHandler<Integer>());
+			if(result != null) {
+				System.out.println(result);
+				return result;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new Message("用户查询cid失败");
+		}
+	}
+	/**
+	 * 执行查询user表的语句
+	 * 根据uuid查询user表的integral值
+	 * @param uuid
+	 * @return
+	 * @throws Message
+	 */
+	public static Integer queryintegral(String uuid) throws Message {
+		try {
+			String sql = "select integral from user where uuid=?";
+			Integer result = qr.query(sql, uuid, new ScalarHandler<Integer>());
+			if(result != null) {
+				System.out.println(result);
+				if(result < 0)
+					result = 0;
+				return result;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new Message("用户查询integral失败");
+		}
+		
 	}
 	private static Object[] getparamObject(User user) {
 		Object cid,sid;
