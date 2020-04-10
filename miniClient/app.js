@@ -38,7 +38,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null //微信获取的用户信息
+    user:{}, //后台返回用户全部信息
+    userInfo:{}, //微信获取的用户信息
  },
   /**
    * 当小程序启动，或从后台进入前台显示，会触发 onShow

@@ -1,4 +1,4 @@
-/* pages/components/signin/signin.wxss */
+/* pages/components/signup/signup.wxss */
 page{
   left: 0rpx;
   right: 0rpx;
@@ -68,3 +68,5 @@ page{
   margin-left:15rpx;
   font-family:Microsoft Yahei；
 }
+
+

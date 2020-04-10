@@ -1,22 +1,21 @@
 <!--pages/components/signin/signin.wxml-->
 <view class="signin">
   <view class="username">
-    <input class="inputs" placeholder="用户名" placeholder-class="plas" type="text"></input>
+    <input class="inputs" placeholder="用户名" placeholder-class="plas" type="text" bindinput="usernameInput"></input>
   </view>
 
    <view class="pw">
-    <input class="inputs" placeholder="手机号" placeholder-class="plas" type="number"></input>
+    <input class="inputs" placeholder="登陆密码" placeholder-class="plas" type="password" bindinput="passwordInput"></input>
   </view>
-
-   <view class="pw">
-    <input class="inputs" placeholder="登陆密码" placeholder-class="plas" type="password"></input>
-  </view>
-
-   <view class="pw">
-    <input class="inputs" placeholder="确认密码" placeholder-class="plas" type="password"></input>
-  </view>
-  <view class="signinclick">注册</view>
-  <view class="signup">
-   <text class="words">已有账号，直接登录</text>
+ <!--登录按钮响应-->
+  <view class="signinclick" bindtap="login" >登录</view>
+  
+  <!--跳转到注册页面的按钮-->
+  <view class="signup" id="btn" bindtap="signupResponce">
+   <text class="words" >没有账号，点此注册</text>
   </view>
 </view>
+
+
+
+

@@ -1,16 +1,27 @@
 <!--pages/components/signup/signup.wxml-->
 <view class="signup">
   <view class="username">
-    <input class="inputs" placeholder="用户名" placeholder-class="plas" type="text"></input>
+    <input class="inputs"  id="name" placeholder="用户名" placeholder-class="plas" type="text" bindinput="usernameInput"></input>
   </view>
 
    <view class="pw">
-    <input class="inputs" placeholder="登陆密码" placeholder-class="plas" type="password"></input>
+    <input class="inputs" id="phonenumber" placeholder="手机号" placeholder-class="plas" type="number" bindinput="phonenumberInput"></input>
   </view>
 
-  <view class="signupclick">登录</view>
-  <view class="signin">
-   <text class="words">没有账号，点此注册</text>
+   <view class="pw">
+    <input class="inputs" id="psw" placeholder="登陆密码" placeholder-class="plas" type="password" bindinput="passwordInput"></input>
+  </view>
+
+   <view class="pw">
+    <input class="inputs" id="pswack" placeholder="确认密码" placeholder-class="plas" type="password" bindinput="passwordInputAck"></input>
+  </view>
+
+  <!--注册响应-->
+  <view class="signupclick" bindtap="regist">注册</view>
+
+<!--跳转登录的按钮-->
+  <view class="signin" id="btn" bindtap="signinResponce">
+   <text class="words">已有账号，直接登录</text>
   </view>
 </view>
 

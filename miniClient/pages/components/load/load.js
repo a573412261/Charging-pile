@@ -7,35 +7,65 @@ Page({
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-
+  // 授权登陆页面跳转到登陆页面
+    next:function(e){
+      console.log("userInfo",getApp().globalData.userInfo)
+      wx.redirectTo({
+        url: '/pages/components/signin/signin',
+      })
+    },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     wx.showLoading({
       title: '加载中',
     })
 
-     // 查看是否授权
-     wx.getSetting({
-      success (res){
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          wx.getUserInfo({
-            success: function(res) {
-              console.log(res.userInfo)
+    wx.login({
+      success (res) {
+        if (res.code) {
+          // //发起网络请求
+          // wx.request({
+          //   url: 'https://test.com/onLogin',
+          //   data: {
+          //     code: res.code
+          //   }
+          // })
+          // 查看是否授权
+          wx.getSetting({
+            success (res){
+              if (res.authSetting['scope.userInfo']) {
+                // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+                wx.getUserInfo({
+                  success: function(res) {
+                    getApp().globalData.userInfo = res.userInfo
+                    that.next();
+                  }
+                })
+              }
             }
           })
+        } else {
+          console.log('登录失败！' + res.errMsg)
         }
       }
     })
+     
     setTimeout(function(){
       wx.hideLoading()
     },2000)
   },
 
   bindGetUserInfo (e) {
-    console.log(e.detail.userInfo)
+    getApp().globalData.userInfo = e.detail.userInfo
+    if(e.detail.userInfo==undefined){
+    }
+    else{
+      this.next();
+    }
+     
   },
 
   

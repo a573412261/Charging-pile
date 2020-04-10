@@ -7,14 +7,19 @@ Page({
   data: {
 
   },
+   //登陆成功后，跳转到主页
+login:function(options){
+  wx.switchTab({
+    url: 'pages/components/index/index',
+  })
+},
+//   handleGetUserInfo(e){
+//     // console.log(e);
 
-  handleGetUserInfo(e){
-    // console.log(e);
-
-    const {userInfo} = e.detail;
-    wx.setStorageSync("userinfo", userInfo);
-    wx.navigateBack({
-      delta: 1
-    });
-  }
-})
+//     const {userInfo} = e.detail;
+//     wx.setStorageSync("userinfo", userInfo);
+//     wx.navigateBack({
+//       delta: 1
+//     });
+//   }
+ })

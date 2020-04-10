@@ -1,4 +1,5 @@
 /* pages/components/signup/signup.wxss */
+/* pages/components/signin/signin.wxss */
 page{
   left: 0rpx;
   right: 0rpx;
