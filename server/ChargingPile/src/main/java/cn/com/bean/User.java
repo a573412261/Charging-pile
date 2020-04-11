@@ -19,7 +19,7 @@ public class User {
 	private Schedule schedule;
 	private Date create_time;
 	private Order order[];	//所有订单
-	private Comment comment[];	//所以评价
+	private Comment comment[];	//所有评价
 	private Reply reply[];	//所有回复
 	
 	public User() {

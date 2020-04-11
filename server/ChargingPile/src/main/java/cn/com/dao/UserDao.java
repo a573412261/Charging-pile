@@ -5,12 +5,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import cn.com.bean.Message;
 import cn.com.bean.User;
 import cn.com.jdbc.TxQueryRunner;
 import cn.com.utils.CommonUtils;
+
+/**
+ * ResultSetHandler接口：
+ * BeanHandler（单行） --> 构造器需要一个class类型的参数，用来把一行结果转化为指定类型的JavaBean对象
+ * BeanListHandler（多行） --> 构造器需要一个class类型的参数，用来把结果集转换成List对象，一堆JavaBean
+ * MapHandler（单行） --> 把一行结果集转换成Map对象
+ * MapListHandler（多行）把一行记录转换成一个Map，多行就是多个Map,即List<Map>
+ * ScalarHandler（单行单列） --> 通常用于select count(*) from user 语句，结果集是单行单列，返回一个object
+ * @author ASUS
+ *
+ */
+
+
+
 
 public class UserDao {
 	private static TxQueryRunner qr = new TxQueryRunner();
@@ -67,6 +82,32 @@ public class UserDao {
 		}
 		
 	}
+	/**
+	 *	通过uuid查询用户信息
+	 * @param uuid
+	 * @return 返回用户对象
+	 * @throws Message
+	 */
+	public static User query(String uuid) throws Message {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "select uid,username,cartype,carnumber,integral,"
+					+ "balance,address,cid,sid from user where uuid=?";
+			Object paramObject[] = {uuid};
+			User user = qr.query(sql, paramObject,new BeanHandler<User>(User.class));
+			if(user != null) {
+				System.out.println("操作数据库成功：");
+				System.out.println(user);
+				return user;
+			}
+			return null;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Message("查询用户信息失败");
+		}
+	}
+	
 	/**
 	 * 执行修改user表语句
 	 * 修改数据库中user的balance
@@ -247,6 +288,7 @@ public class UserDao {
 		}
 		
 	}
+	
 	private static Object[] getparamObject(User user) {
 		Object cid,sid;
 		if(user.getChargingpile()!=null)
@@ -262,4 +304,5 @@ public class UserDao {
 				user.getAddress(),cid,sid};
 		return paramObject;
 	}
+
 }

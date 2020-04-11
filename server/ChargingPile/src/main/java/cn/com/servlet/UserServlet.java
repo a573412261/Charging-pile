@@ -292,4 +292,30 @@ public class UserServlet extends BaseServlet {
 			response.getWriter().print(e.getJsonMessage());
 		}
 	}
+	/**
+	 * 场景：通过uuid拉取用户信息
+	 * 输入：uuid
+	 * 输出：
+	 * 	成功：返回用户信息
+	 * 	失败：失败原因
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void getUserinfoByUuid(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		// TODO Auto-generated method stub
+		try {
+			//获取参数uuid
+			JSONObject jsonobject = MultiplexUtils.getUandM(request, response);
+			String uuid = jsonobject.getString("uuid");
+			//获取用户对象
+			User user = userService.queryByUuid(uuid);
+			//返回成功信息及用户对象
+			JSONObject jsonObject = new Message(SUCCESS).getJsonMessage();
+			jsonObject.put("userInfo",MultiplexUtils.JavaBeanToJSONObject(user));
+			response.getWriter().print(jsonObject);
+		}catch(Message e) {
+			response.getWriter().print(e.getJsonMessage());
+		}
+	}
 }
