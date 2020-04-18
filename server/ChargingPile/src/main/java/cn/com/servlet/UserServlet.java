@@ -386,4 +386,64 @@ public class UserServlet extends BaseServlet {
 			response.getWriter().print(e.getJsonMessage());
 		}
 	}
+	
+	/**
+	 * 场景：通过cid拉取充电桩信息
+	 * 输入：cid
+	 * 输出：
+	 * 	成功：返回用户信息
+	 * 	失败：失败原因
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void getChargingpileinfoByCid(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		// TODO Auto-generated method stub
+		try {
+			
+			JSONObject jsonobject = MultiplexUtils.getUandM(request, response);
+			String cid = jsonobject.getString("cid");
+			//获取用户对象
+			Chargingpile Chargingpile = userService.queryByCid(cid);
+			//返回成功信息及用户对象
+			JSONObject jsonObject = new Message(SUCCESS).getJsonMessage();
+			jsonObject.put("ChargingpileInfo",MultiplexUtils.JavaBeanToJSONObject(Chargingpile));
+			response.getWriter().print(jsonObject);
+		}catch(Message e) {
+			response.getWriter().print(e.getJsonMessage());
+		}
+	}
+
+	/**
+	 * 场景：用户对评价进行回复
+	 * 输入：用户标识码uuid,回复内容text,评价comid;
+	 * 输出：
+	 * 	成功：确认码
+	 * 	失败：失败原因
+	 * 数据库：reply表中增加一条记录
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws Exception
+	 */	
+	public void reply(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		try {
+			//获取数据对象object对象
+			JSONObject jsonobject = MultiplexUtils.getUandM(request, response);
+
+			//从前端获取用户、充电桩对象以及评论内容与等级
+			String uuid=jsonobject.getString("uuid");
+			String comid=jsonobject.getString("comid");
+			String text=jsonobject.getString("text");
+			//进行评论
+			userService.reply(text,comid, uuid);
+
+			//返回前端操作成功信息
+			JSONObject jsonObject1 = new Message(SUCCESS).getJsonMessage();
+			response.getWriter().print(jsonObject1);
+		} catch (Message e) {
+			// 异常打印信息 {"result":"xxx"}
+			response.getWriter().print(e.getJsonMessage());
+		}
+	}
 }

@@ -1,6 +1,8 @@
 package cn.com.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -36,5 +38,31 @@ public class ReplyDao {
 			e.printStackTrace();
 			throw new Message("获取回复信息出错");
 		}
+	}
+	
+	/**
+	 * 执行插入reply表语句	
+	 * 将此reply记录插入到数据库中
+	 * @throws Message 
+	 */
+	public static void add(String text,String comid,String uuid) throws Message {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "insert into reply(text,comid,uid,`like`,hate) "
+					+ "values(?,?,?,0,0)";
+			User user =UserDao.query(uuid);
+			Integer uid=user.getUid();
+			Object paramObject[] = {text,comid,uid}; 
+			ArrayList<Object> arrayList = new ArrayList<Object>(Arrays.asList(paramObject));
+			int result = qr.update(sql,arrayList.toArray());
+			if(result>0) {
+				System.out.println("操作数据库成功，影响行数："+result);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Message("回复评论失败");
+		}
+
 	}
 }

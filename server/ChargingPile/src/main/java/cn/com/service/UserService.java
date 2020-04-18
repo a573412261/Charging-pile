@@ -191,4 +191,60 @@ public class UserService {
 		}
 		return null;
 	}
+	/**
+	 * 通过cid查询充电桩
+	 * @param cid
+	 * @throws Message
+	 */
+	public Chargingpile queryByCid(String cid) throws Message{
+		try {
+			//开启事务
+			jdbcUtils.beginTransaction();	
+			//获取Chargingpile对象（无评价），订单消息无法查询
+			Chargingpile Chargingpile = ChargingpileDao.query(cid);
+			//获取Chargingpile的所有评价信息
+			List<Comment> comments = CommentDao.getCommentByCid(Chargingpile);						
+			//将订单信息，评价信息，回复信息都添加到user中
+			Chargingpile.setComment(MultiplexUtils.commentListToArray(comments));		
+			//提交事务
+			jdbcUtils.commitTransaction();
+			return Chargingpile;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				//回滚事务
+				jdbcUtils.rollbackTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 通过text，comid，uuid回复评论
+	 * @param text，comid，uuid
+	 * @throws Message
+	 */	
+	public Object[] reply(String text,String comid,String uuid) throws Message {
+		try {
+			//开启事务
+			jdbcUtils.beginTransaction();		
+			ReplyDao.add(text,comid,uuid);
+			jdbcUtils.commitTransaction();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				//回滚事务
+				jdbcUtils.rollbackTransaction();	
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
+	}
 }

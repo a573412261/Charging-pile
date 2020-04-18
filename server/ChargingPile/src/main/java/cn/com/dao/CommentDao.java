@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
+import cn.com.bean.Chargingpile;
 import cn.com.bean.Comment;
 import cn.com.bean.Message;
 import cn.com.bean.Order;
@@ -68,5 +69,30 @@ public class CommentDao {
 			throw new Message("评论失败");
 		}
 		
+	}
+	
+	/**
+	 * 	通过cid获取评价信息
+	 * @param Chargingpile
+	 * @return 返回评价信息列表
+	 * @throws Message
+	 */
+	public static List<Comment> getCommentByCid(Chargingpile Chargingpile) throws Message{
+		// TODO Auto-generated method stub
+		try {
+			String sql = "select time,text,comment.rank,uid "
+					+ "from comment where cid=?";
+			Object paramsObject[] = {Chargingpile.getCid()};
+			List<Comment> comments = qr.query(sql, paramsObject, new BeanListHandler<Comment>(Comment.class));
+			if(comments.size()>0) {
+				System.out.println(comments);
+				return comments;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new Message("获取评价信息出错");
+		}
 	}
 }
