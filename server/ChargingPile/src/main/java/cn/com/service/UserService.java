@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import cn.com.bean.Chargingpile;
 import cn.com.bean.Comment;
@@ -133,5 +134,61 @@ public class UserService {
 		}
 		//返回用户当前的积分值
 		return UserDao.queryintegral(uuid);
+	}
+	
+	public Object[] pay(String uuid, String oid) throws Message {
+		try {
+			//开启事务
+			jdbcUtils.beginTransaction();		
+			//根据oid来查询订单这次充电的费用
+			BigDecimal cost =OrderDao.querycost(oid);
+			//用户支付 即update balance
+			UserDao.pay(uuid, cost);
+			
+			//根据用例图描述，根据支付费用同比例转化为积分，所以直接简单的四舍五入把费用取整。
+			//后期若有更好的积分制度这里要重新写。就相当于把bigdecimal转化为integer
+			Integer getintegral =cost.intValue();
+			
+			//更新积分
+			UserDao.updateintegral(uuid, getintegral);
+			//打包积分和余额
+			Integer integral=UserDao.queryintegral(uuid);
+			BigDecimal balance = UserDao.querymoney(uuid);
+			Object[] back= {integral,balance,getintegral};
+			//提交事务
+			jdbcUtils.commitTransaction();	
+			return back;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				//回滚事务
+				jdbcUtils.rollbackTransaction();	
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	public Object[] comment(String text,int rank,String cid,String uuid) throws Message {
+		try {
+			//开启事务
+			jdbcUtils.beginTransaction();		
+			CommentDao.add(text,rank,cid,uuid);
+			jdbcUtils.commitTransaction();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				//回滚事务
+				jdbcUtils.rollbackTransaction();	
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
 	}
 }
