@@ -289,6 +289,28 @@ public class UserDao {
 		
 	}
 	
+	/**
+	 * 执行查询user表的语句
+	 * 根据uuid查询user表的uid值
+	 * @param uuid
+	 * @return
+	 * @throws Message
+	 */
+	public static Integer queryuid(String uuid) throws Message {
+		try {
+			String sql = "select uid from user where uuid=?";
+			Integer result = qr.query(sql, uuid, new ScalarHandler<Integer>());
+			if(result != null) {
+				System.out.println(result);
+				return result;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new Message("用户查询uid失败");
+		}
+	}
 	private static Object[] getparamObject(User user) {
 		Object cid,sid;
 		if(user.getChargingpile()!=null)
@@ -304,5 +326,7 @@ public class UserDao {
 				user.getAddress(),cid,sid};
 		return paramObject;
 	}
-
+	
+	
+	
 }

@@ -2,6 +2,7 @@ package cn.com.service;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -133,5 +134,61 @@ public class UserService {
 		}
 		//返回用户当前的积分值
 		return UserDao.queryintegral(uuid);
+	}
+	
+	public String startchagingService(String uuid, Chargingpile chargingpile) throws Message {
+		String orderno = null;
+		try {
+			jdbcUtils.beginTransaction();
+			//如果充电桩为当前用户所预约的，需要将用户当前所预约的信息置空
+			if(ChargingpileDao.querystatus(chargingpile.getCid()) == 2) {
+				UserDao.updatecidsid(uuid, null, null);
+			}
+			//修改充电桩的状态为正在充电状态
+			ChargingpileDao.updatestatus(chargingpile);
+			//给订单表增加一条订单数据，该订单的状态为进行中
+			orderno = OrderDao.add(2,uuid,chargingpile.getCid());
+			jdbcUtils.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				jdbcUtils.rollbackTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		//返回订单编号
+		return orderno;
+		
+	}
+	
+	public Object[] stopchargingService(String order_code, Chargingpile chargingpile) throws Message{
+		
+		try {
+			jdbcUtils.beginTransaction();
+			//根据充电桩cid查询充电桩的功率
+			BigDecimal power = ChargingpileDao.querypower(chargingpile.getCid());
+			//根据充电桩cid查询充电桩的标准收费
+			BigDecimal charge = ChargingpileDao.querycharge(chargingpile.getCid());
+			//充电完成后计算出订单所需要的数据并更新
+			Object back[] = OrderDao.update(order_code, power, charge, 0);
+			//修改充电桩的状态为空闲状态
+			ChargingpileDao.updatestatus(chargingpile);
+			jdbcUtils.commitTransaction();
+			return back;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				jdbcUtils.rollbackTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
+		
 	}
 }

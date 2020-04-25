@@ -3,6 +3,10 @@ package cn.com.servlet;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -313,6 +317,69 @@ public class UserServlet extends BaseServlet {
 			//返回成功信息及用户对象
 			JSONObject jsonObject = new Message(SUCCESS).getJsonMessage();
 			jsonObject.put("userInfo",MultiplexUtils.JavaBeanToJSONObject(user));
+			response.getWriter().print(jsonObject);
+		}catch(Message e) {
+			response.getWriter().print(e.getJsonMessage());
+		}
+	}
+	
+	/**
+	 * 场景：用户点击“启动充电”按钮给车进行充电操作
+	 * 输入：uuid,cid
+	 * 输出：
+	 *   成功：返回进行中订单的编号
+	 *   失败：失败原因
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void startcharging(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		try {
+			JSONObject jsonobject = MultiplexUtils.getUandM(request, response);
+			//获取uuid和cid参数
+			String uuid = jsonobject.getString("uuid");
+			String cidString = jsonobject.getString("cid");
+			Integer cid = Integer.parseInt(cidString);
+			//创建chargingpile对象
+			Chargingpile chargingpile = new Chargingpile();
+			chargingpile.setCid(cid);
+			chargingpile.setStatus(1);
+			String orderno = userService.startchagingService(uuid,chargingpile);
+			JSONObject jsonObject = new Message(SUCCESS).getJsonMessage();
+			//返回订单编号给前端
+			jsonObject.put("orderno", orderno);
+			response.getWriter().print(jsonObject);
+		}catch(Message e) {
+			response.getWriter().print(e.getJsonMessage());
+		}
+	}
+	/**
+	 * 场景：用户点击“停止充电”按钮停止给车充电操作
+	 * 输入：cid,order_code
+	 * 输出：
+	 * 	 成功：返回充电时长，充电电量，充电费用
+	 * 	 失败：失败原因
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	public void stopcharging(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		try {
+			//获取cid和order_code
+			JSONObject jsonobject = MultiplexUtils.getUandM(request, response);
+			String cidString = jsonobject.getString("cid");
+			String order_code = jsonobject.getString("order_code");
+			Integer cid = Integer.parseInt(cidString);
+			//创建chargingpile对象
+			Chargingpile chargingpile = new Chargingpile();
+			chargingpile.setCid(cid);
+			chargingpile.setStatus(0);
+			Object back[] = userService.stopchargingService(order_code,chargingpile);
+			JSONObject jsonObject = new Message(SUCCESS).getJsonMessage();
+			//返回充电时长、充电电量、充电费用给前端
+			jsonObject.put("time_display", back[0]);
+			jsonObject.put("capacity", back[1]);
+			jsonObject.put("cost", back[2]);
 			response.getWriter().print(jsonObject);
 		}catch(Message e) {
 			response.getWriter().print(e.getJsonMessage());
