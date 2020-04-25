@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
+import org.apache.commons.dbutils.handlers.BeanHandler;
+
 import cn.com.bean.Chargingpile;
 import cn.com.bean.Message;
 import cn.com.jdbc.TxQueryRunner;
@@ -13,6 +15,7 @@ public class ChargingpileDao {
 	/**
 	 * 执行修改chargingpile表语句
 	 * 修改数据库中chargingpile表的信息
+	 * 可能要加上throws message
 	 * @param chargeingpile
 	 */
 	public static void updatestatus(Chargingpile chargingpile) throws Message{
@@ -93,4 +96,26 @@ public class ChargingpileDao {
 			throw new Message("查询标准收费失败");
 		} 
 	}
+	
+	//获取充电桩的信息
+	public static Chargingpile query(String cid) throws Message {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "select address,charge,cid,code,"
+					+ "interfacetype,latitude,longitude,name,power,chargingpile.rank,status from chargingpile where cid=?";
+			Object paramObject[] = {cid};
+			Chargingpile Chargingpile = qr.query(sql, paramObject,new BeanHandler<Chargingpile>(Chargingpile.class));
+			if(Chargingpile != null) {
+				System.out.println("操作数据库成功：");
+				System.out.println(Chargingpile);
+				return Chargingpile;
+			}
+			return null;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Message("查询充电桩信息失败");
+		}
+	}
+
 }	

@@ -132,6 +132,29 @@ public class UserDao {
 	}
 	
 	/**
+	 * 执行修改user表语句
+	 * 修改数据库中user的balance
+	 * @String uuid BigDecimal cost
+	 * @throws Message
+	 */
+	public static void pay(String uuid,BigDecimal cost) throws Message {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "update user set balance=balance-? where uuid=?"; 
+			Object[] parms= {cost,uuid};
+			int result = qr.update(sql,parms);
+			if(result>0) {
+				System.out.println("操作数据库成功，影响行数："+result);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Message("支付失败");
+		}
+		
+	}
+	
+	/**
 	 * 执行查询user表语句
 	 * 根据uuid查询数据库中user的balance
 	 * @String uuid

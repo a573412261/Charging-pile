@@ -2,9 +2,9 @@ package cn.com.service;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import cn.com.bean.Chargingpile;
 import cn.com.bean.Comment;
@@ -190,5 +190,117 @@ public class UserService {
 		}
 		return null;
 		
+	}
+	
+	public Object[] pay(String uuid, String oid) throws Message {
+		try {
+			//开启事务
+			jdbcUtils.beginTransaction();		
+			//根据oid来查询订单这次充电的费用
+			BigDecimal cost =OrderDao.querycost(oid);
+			//用户支付 即update balance
+			UserDao.pay(uuid, cost);
+			
+			//根据用例图描述，根据支付费用同比例转化为积分，所以直接简单的四舍五入把费用取整。
+			//后期若有更好的积分制度这里要重新写。就相当于把bigdecimal转化为integer
+			Integer getintegral =cost.intValue();
+			
+			//更新积分
+			UserDao.updateintegral(uuid, getintegral);
+			//打包积分和余额
+			Integer integral=UserDao.queryintegral(uuid);
+			BigDecimal balance = UserDao.querymoney(uuid);
+			Object[] back= {integral,balance,getintegral};
+			//提交事务
+			jdbcUtils.commitTransaction();	
+			return back;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				//回滚事务
+				jdbcUtils.rollbackTransaction();	
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	public Object[] comment(String text,int rank,String cid,String uuid) throws Message {
+		try {
+			//开启事务
+			jdbcUtils.beginTransaction();		
+			CommentDao.add(text,rank,cid,uuid);
+			jdbcUtils.commitTransaction();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				//回滚事务
+				jdbcUtils.rollbackTransaction();	
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
+	}
+	/**
+	 * 通过cid查询充电桩
+	 * @param cid
+	 * @throws Message
+	 */
+	public Chargingpile queryByCid(String cid) throws Message{
+		try {
+			//开启事务
+			jdbcUtils.beginTransaction();	
+			//获取Chargingpile对象（无评价），订单消息无法查询
+			Chargingpile Chargingpile = ChargingpileDao.query(cid);
+			//获取Chargingpile的所有评价信息
+			List<Comment> comments = CommentDao.getCommentByCid(Chargingpile);						
+			//将订单信息，评价信息，回复信息都添加到user中
+			Chargingpile.setComment(MultiplexUtils.commentListToArray(comments));		
+			//提交事务
+			jdbcUtils.commitTransaction();
+			return Chargingpile;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				//回滚事务
+				jdbcUtils.rollbackTransaction();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 通过text，comid，uuid回复评论
+	 * @param text，comid，uuid
+	 * @throws Message
+	 */	
+	public Object[] reply(String text,String comid,String uuid) throws Message {
+		try {
+			//开启事务
+			jdbcUtils.beginTransaction();		
+			ReplyDao.add(text,comid,uuid);
+			jdbcUtils.commitTransaction();	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				//回滚事务
+				jdbcUtils.rollbackTransaction();	
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
 	}
 }

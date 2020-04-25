@@ -76,6 +76,8 @@ public class OrderDao {
 		}
 		return null;
 	}
+	
+	
 	/**
 	 * 执行更新order语句
 	 * 新增完成充电时产生的一些记录
@@ -120,5 +122,22 @@ public class OrderDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static BigDecimal querycost(String oid) throws Message{
+		// TODO Auto-generated method stub
+		try {
+			String sql = "select cost from `order` where oid=?";
+			BigDecimal result = qr.query(sql, oid, new ScalarHandler<BigDecimal>());
+			if(result!=null) {
+				System.out.println(result);
+				return result;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new Message("查询失败");
+		}
 	}
 }
