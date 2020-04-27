@@ -28,6 +28,7 @@ import cn.com.service.UserService;
 import cn.com.utils.BaseServlet;
 import cn.com.utils.CommonUtils;
 import cn.com.utils.MultiplexUtils;
+import cn.com.utils.ResultModel;
 
 @WebServlet("/user")
 public class UserServlet extends BaseServlet {
@@ -184,12 +185,14 @@ public class UserServlet extends BaseServlet {
 			//更新数据库中user的余额并返回余额
 			BigDecimal balance=userService.chargingmoney(uuid, money);
 			//返回操作成功前端余额
-			JSONObject jsonObject1 = new Message(SUCCESS).getJsonMessage();
-			jsonObject1.put("balance", balance);
-			response.getWriter().print(jsonObject1);
+			JSONObject data = new JSONObject();
+			data.put("balance", balance);
+			JSONObject result=ResultModel.success(data);
+			response.getWriter().print(result);
 		} catch (Message e) {
 			// 异常打印信息 {"result":"xxx"}
-			response.getWriter().print(e.getJsonMessage());
+			JSONObject error=ResultModel.error(e.getMessage());
+			response.getWriter().print(error);
 		}
 	}
 	
@@ -408,14 +411,15 @@ public class UserServlet extends BaseServlet {
 			Object[] back=userService.pay(uuid, oid);
 			
 			//返回前端操作成功信息及 得到的积分 支付后的余额 以及更新后的积分
-			JSONObject jsonObject1 = new Message(SUCCESS).getJsonMessage();
-			jsonObject1.put("integral", back[0]);
-			jsonObject1.put("balance",back[1]);
-			jsonObject1.put("getintegral",back[2]);
-			response.getWriter().print(jsonObject1);
-		} catch (Message e) {
-			// 异常打印信息 {"result":"xxx"}
-			response.getWriter().print(e.getJsonMessage());
+			JSONObject data = new JSONObject();
+			data.put("integral", back[0]);
+			data.put("balance",back[1]);
+			data.put("getintegral",back[2]);
+			JSONObject result = ResultModel.success(data);
+			response.getWriter().print(result);
+		} catch (Message e) {			
+			JSONObject error=ResultModel.error(e.getMessage());
+			response.getWriter().print(error);
 		}
 	}
 	
@@ -446,11 +450,12 @@ public class UserServlet extends BaseServlet {
 			userService.comment(text, rank, cid, uuid);
 			
 			//返回前端操作成功信息
-			JSONObject jsonObject1 = new Message(SUCCESS).getJsonMessage();
-			response.getWriter().print(jsonObject1);
+			JSONObject result=ResultModel.success();
+			response.getWriter().print(result);
 		} catch (Message e) {
 			// 异常打印信息 {"result":"xxx"}
-			response.getWriter().print(e.getJsonMessage());
+			JSONObject error=ResultModel.error(e.getMessage());
+			response.getWriter().print(error);
 		}
 	}
 	
