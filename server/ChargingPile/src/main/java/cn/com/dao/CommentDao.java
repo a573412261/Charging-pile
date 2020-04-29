@@ -66,7 +66,7 @@ public class CommentDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			throw new Message("评论失败");
+			throw new Message("评论失败",1);
 		}
 		
 	}

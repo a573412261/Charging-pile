@@ -191,7 +191,7 @@ public class UserServlet extends BaseServlet {
 			response.getWriter().print(result);
 		} catch (Message e) {
 			// 异常打印信息 {"result":"xxx"}
-			JSONObject error=ResultModel.error(e.getMessage());
+			JSONObject error=ResultModel.error(e.getError_code(),e.getMessage());
 			response.getWriter().print(error);
 		}
 	}
@@ -418,7 +418,7 @@ public class UserServlet extends BaseServlet {
 			JSONObject result = ResultModel.success(data);
 			response.getWriter().print(result);
 		} catch (Message e) {			
-			JSONObject error=ResultModel.error(e.getMessage());
+			JSONObject error=ResultModel.error(e.getError_code(),e.getMessage());
 			response.getWriter().print(error);
 		}
 	}
@@ -454,7 +454,7 @@ public class UserServlet extends BaseServlet {
 			response.getWriter().print(result);
 		} catch (Message e) {
 			// 异常打印信息 {"result":"xxx"}
-			JSONObject error=ResultModel.error(e.getMessage());
+			JSONObject error=ResultModel.error(e.getError_code(),e.getMessage());
 			response.getWriter().print(error);
 		}
 	}
